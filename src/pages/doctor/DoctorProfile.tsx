@@ -136,14 +136,18 @@ const DoctorProfile = () => {
   
         <div className="flex flex-col items-center">
           <div className="relative">
-            <img
-              src={
-                formData.profile_picture ||
-                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop"
-              }
-              alt="Profile"
-              className="w-28 h-28 rounded-full object-cover shadow-md"
-            />
+            {formData.profile_picture ? (
+              <img
+                src={formData.profile_picture}
+                alt="Profile"
+                className="w-32 h-32 rounded-full object-cover"
+              />
+            ) : (
+              <div
+                className="w-32 h-32 rounded-full bg-blue-200"
+              />
+            )}
+
             {isEditing && (
               <div className="absolute bottom-1 right-1 bg-white rounded-full p-2 shadow-md cursor-pointer">
                 <Camera className="w-5 h-5 text-gray-600" />
