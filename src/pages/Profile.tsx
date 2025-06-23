@@ -313,7 +313,7 @@ const Profile = () => {
             <div className="flex items-center space-x-6">
               <div className="relative">
                 <img
-                  src={formData.profile_picture || 'Not set'}
+                  src={formData.profile_picture}
                   alt="Profile"
                   className="w-32 h-32 rounded-full object-cover"
                 />
@@ -453,7 +453,7 @@ const Profile = () => {
           <div className="space-y-8">
             <div className="flex items-center space-x-6">
               <img
-                src={profile?.profile_picture || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop'}
+                src={profile?.profile_picture || 'Not set'}
                 alt="Profile"
                 className="w-32 h-32 rounded-full object-cover"
               />
