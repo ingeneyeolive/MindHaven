@@ -18,7 +18,8 @@ const Auth = ({ onSuccess }: AuthProps) => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
 
-
+const [dateOfBirth, setDateOfBirth] = useState('');
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -51,9 +52,23 @@ const Auth = ({ onSuccess }: AuthProps) => {
       if (authResponse.error) throw authResponse.error;
 
       if (authResponse.data.user) {
-        if (onSuccess) onSuccess();
-        navigate('/profile');
-      }
+  const userId = authResponse.data.user.id;
+
+  if (isSignUp && dateOfBirth) {
+    // Insert into user_profiles
+    const { error: profileError } = await supabase
+      .from('user_profiles')
+      .insert([{ user_id: userId, date_of_birth: dateOfBirth }]);
+
+    if (profileError) {
+      throw profileError;
+    }
+  }
+
+  if (onSuccess) onSuccess();
+  navigate('/profile');
+}
+
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -126,6 +141,26 @@ const Auth = ({ onSuccess }: AuthProps) => {
               />
             </div>
           </div>
+          
+{isSignUp && (
+  <div>
+    <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
+      Date of Birth
+    </label>
+    <div className="mt-1">
+      <input
+        id="dob"
+        name="dob"
+        type="date"
+        required
+        value={dateOfBirth}
+        onChange={(e) => setDateOfBirth(e.target.value)}
+        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 bg-white shadow-sm transition-all duration-300 placeholder-gray-400 text-gray-900"
+      />
+    </div>
+  </div>
+)}
+
           <div>
             <button
               type="submit"
