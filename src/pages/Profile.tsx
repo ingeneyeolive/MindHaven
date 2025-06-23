@@ -312,11 +312,18 @@ const Profile = () => {
           <form onSubmit={handleSubmit} className="space-y-8">
             <div className="flex items-center space-x-6">
               <div className="relative">
-                <img
-                  src={formData.profile_picture}
-                  alt="Profile"
-                  className="w-32 h-32 rounded-full object-cover"
-                />
+                {formData.profile_picture ? (
+                  <img
+                    src={formData.profile_picture}
+                    alt="Profile"
+                    className="w-32 h-32 rounded-full object-cover"
+                  />
+                ) : (
+                  <div
+                    className="w-32 h-32 rounded-full bg-blue-200"
+                  />
+                )}
+
                 <div className="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-lg">
                   <Camera className="w-5 h-5 text-gray-600" />
                 </div>
@@ -452,11 +459,18 @@ const Profile = () => {
         ) : (
           <div className="space-y-8">
             <div className="flex items-center space-x-6">
-              <img
-                src={profile?.profile_picture || 'Not set'}
-                alt="Profile"
-                className="w-32 h-32 rounded-full object-cover"
-              />
+              {profile?.profile_picture ? (
+                <img
+                  src={profile.profile_picture}
+                  alt="Profile"
+                  className="w-32 h-32 rounded-full object-cover"
+                />
+              ) : (
+                <div
+                  className="w-32 h-32 rounded-full bg-blue-200"
+                />
+              )}
+
               <div>
                 <h2 className="text-2xl font-semibold text-gray-900">{profile?.name || 'No name set'}</h2>
                 <p className="text-gray-600">@{profile?.username || 'Username not set'}</p>
