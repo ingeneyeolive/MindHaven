@@ -58,7 +58,7 @@ const [dateOfBirth, setDateOfBirth] = useState('');
     // Insert into user_profiles
     const { error: profileError } = await supabase
       .from('user_profiles')
-      .insert([{ user_id: userId, date_of_birth: dateOfBirth }]);
+      .upsert({ user_id: userId, date_of_birth: dateOfBirth }, { onConflict: 'user_id' });
 
     if (profileError) {
       throw profileError;
