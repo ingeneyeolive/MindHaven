@@ -1023,14 +1023,19 @@ const Chat: React.FC = () => {
                     key={doctor.id}
                     className="bg-gray-50 border rounded-lg p-4 flex items-center"
                   >
-                    <img
-                      src={
-                        doctor.profile_picture ||
-                        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop"
-                      }
-                      alt={doctor.name}
-                      className="w-12 h-12 rounded-full object-cover mr-4"
-                    />
+                    {doctor.profile_picture ? (
+                      <img
+                        src={doctor.profile_picture}
+                        alt={doctor.name}
+                        className="w-12 h-12 rounded-full object-cover mr-4"
+                      />
+                    ) : (
+                      <div
+                        className="w-12 h-12 rounded-full bg-gray-800 mr-4"
+                        title={doctor.name}
+                      />
+                    )}
+
                     <div>
                       <h4 className="text-md font-semibold">{doctor.name}</h4>
                       <p className="text-sm text-gray-600 mb-2">{doctor.profession}</p>
